@@ -15,5 +15,10 @@ export default {
 
   auth() {
     return Api().get("/user");
+  },
+
+  form(form){
+    return Api().post("/createst",form);
   }
+
 };
