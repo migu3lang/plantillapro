@@ -39,6 +39,7 @@ class ModalPage extends Component {
         Institutions.newInstitution(this.state.form)
         .then(Response => {
             this.toggle();
+            this.props.sendData();
         })
         .catch(error => { 
             if (error.response.status === 422) {

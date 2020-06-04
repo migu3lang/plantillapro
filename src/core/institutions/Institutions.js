@@ -11,6 +11,7 @@ class Institutions extends Component{
         dataTable: {}
       }
       console.log("crea clase Institutions");
+      this.sendData = this.sendData.bind(this);
     }
 
     componentDidMount(){
@@ -39,6 +40,7 @@ class Institutions extends Component{
                     <ModalFormInstitutions
                         textModalButton="Agregar Institución"
                         titleModal="Formulario creación instituciones"
+                        sendData={this.sendData}
                     />
                     <DataTableInstitutions dataTable={this.state.dataTable}/>
                 </div>

@@ -23,7 +23,7 @@ class DataTableInstitutions extends Component{
         console.log("render clase DataTableInstitutions");      
         return(
             <div>
-                <MDBDataTableV5 
+                <MDBDataTableV5
                     scrollX 
                     hover 
                     entriesOptions={[5, 20, 25]} 
