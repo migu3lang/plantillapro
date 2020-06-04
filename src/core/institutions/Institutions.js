@@ -1,19 +1,35 @@
 import React, {Component} from 'react';
 import ModalFormInstitutions from './ModalFormInstitutions';
+import DataTableInstitutions from './DataTableInstitutions';
+import InstitutionsApi from '../../apis/Institutions';
 
 class Institutions extends Component{
 
     constructor(){
         super();
-
-        this.actualizar = this.actualizar.bind(this);
+      this.state={
+        dataTable: {}
+      }
+      console.log("crea clase Institutions");
     }
 
-    actualizar = () => {
-        alert("transacción exitosa");
+    componentDidMount(){
+        this.sendData();
+    }
+
+    sendData = () => {
+
+        InstitutionsApi.dataTableInstitution()
+        .then(Response => {
+          this.setState({dataTable: Response.data.dataTable});
+        }).catch(error => {
+            console.log("dataTableInstitution: " + error);
+        });
+
     }
 
     render(){
+      console.log("render clase Institutions");
         return(
             <div className="card">
                 <div className="card-header">
@@ -23,8 +39,8 @@ class Institutions extends Component{
                     <ModalFormInstitutions
                         textModalButton="Agregar Institución"
                         titleModal="Formulario creación instituciones"
-                        actualizar={this.actualizar}
                     />
+                    <DataTableInstitutions dataTable={this.state.dataTable}/>
                 </div>
             </div>
         );
