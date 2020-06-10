@@ -50,12 +50,13 @@ class ModalEditInstitutions extends Component {
   }
 
   autoCarga=(e)=>{
-      const element = e.target.name;
-      this.state.form[element] = e.target.value;
-  }
+      this.setState({
+        form:{          
+          [e.target.name]: e.target.value
+        }
+      });
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return (this.state.form.institutionName !== nextState.form.institutionName);
+      //this.state.form[element] = e.target.value;
   }
 
   submit = (e) => {
