@@ -46,6 +46,12 @@ const TopNavigation = () => {
                         Instituciones
                     </MDBListGroupItem>
                 </NavLink>
+                <NavLink to="/areas" activeClassName="activeClass">
+                    <MDBListGroupItem>
+                        <MDBIcon icon="university" className="mr-3"/>
+                        Áreas
+                    </MDBListGroupItem>
+                </NavLink>
             </MDBListGroup>
         </div>
     );

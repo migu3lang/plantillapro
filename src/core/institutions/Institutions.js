@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 import ModalFormInstitutions from './ModalFormInstitutions';
 import DataTableInstitutions from './DataTableInstitutions';
 import InstitutionsApi from '../../apis/Institutions';
 
 class Institutions extends Component{
 
+    state = {
+        institutions: {}
+    }
+
     constructor(){
         super();
-      this.state={
-        dataTable: {}
-      }
       console.log("crea clase Institutions");
       this.sendData = this.sendData.bind(this);
     }
@@ -20,11 +22,14 @@ class Institutions extends Component{
 
     sendData = () => {
 
-        InstitutionsApi.dataTableInstitution()
+        InstitutionsApi.getAllInstitutions()
         .then(Response => {
-          this.setState({dataTable: Response.data.dataTable});
+          this.setState({institutions: Response.data.institutions});
         }).catch(error => {
-            console.log("dataTableInstitution: " + error);
+            console.log("institutions: " + error);
+            if(error.response.status === 401){
+                this.props.history.push('/');
+            }
         });
 
     }
@@ -42,10 +47,10 @@ class Institutions extends Component{
                         titleModal="Formulario creación instituciones"
                         sendData={this.sendData}
                     />
-                    <DataTableInstitutions dataTable={this.state.dataTable}/>
+                    <DataTableInstitutions institutions={this.state.institutions}/>
                 </div>
             </div>
         );
     }
 }
-export default Institutions;
+export default withRouter(Institutions);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Institutions from '../../apis/Institutions';
+import InstitutionsApi from '../../apis/Institutions';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 
 class ModalPage extends Component {
@@ -36,7 +36,7 @@ class ModalPage extends Component {
     submit = (e) => {
         e.preventDefault();
 
-        Institutions.newInstitution(this.state.form)
+        InstitutionsApi.newInstitution(this.state.form)
         .then(Response => {
             this.toggle();
             this.props.sendData();
@@ -97,8 +97,8 @@ class ModalPage extends Component {
                     </form>
                 </MDBModalBody>
                 <MDBModalFooter>
-                    <MDBBtn color="secondary" onClick={this.toggle}>Close</MDBBtn>
-                    <MDBBtn color="primary" onClick={this.submit}>Save changes</MDBBtn>
+                    <MDBBtn color="secondary" onClick={this.toggle}>Cerrar</MDBBtn>
+                    <MDBBtn color="primary" onClick={this.submit}>Guardar</MDBBtn>
                 </MDBModalFooter>
             </MDBModal>
         </MDBContainer>

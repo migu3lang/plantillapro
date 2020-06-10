@@ -4,7 +4,10 @@ export default {
     newInstitution(form){
         return Api().post("/institutions/newInstitution", form);
     },
-    dataTableInstitution(){
-        return Api().post("/institutions/dataTableInstitution");
+    getAllInstitutions(){
+        return Api().get("/institutions/getAllInstitutions");
+    },
+    getInstitution(idInstitution){
+        return Api().post("/institutions/getInstitution",idInstitution);
     }
 }

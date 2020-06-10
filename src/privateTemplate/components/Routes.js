@@ -6,6 +6,7 @@ import TablesPage from './pages/TablesPage';
 import MapsPage from './pages/MapsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import Institutions from '../../core/institutions/Institutions';
+import Areas from '../../core/areas/Areas';
 
 class Routes extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class Routes extends React.Component {
         <Route path='/maps' component={MapsPage} />
         <Route path='/404' component={NotFoundPage} />
         <Route path='/institutions' component={Institutions} />
+        <Route path='/areas' component={Areas} />
       </Switch>
     );
   }

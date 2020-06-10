@@ -5,6 +5,7 @@ let BaseApi = axios.create({
 });
 
 let Api = function() {
+
   let token = localStorage.getItem("token");
 
   if (token) {
