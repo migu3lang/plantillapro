@@ -41,7 +41,7 @@ class Register extends Component {
                     <div className="card">
                         <div className="card-body">
                             <div className="form-group">
-                                <label for="name">Name:</label>
+                                <label htmlFor="name">Name:</label>
                                 <input
                                     type="text"
                                     className="form-control"
@@ -58,7 +58,7 @@ class Register extends Component {
                                 
                             </div>
                             <div className="form-group">
-                                <label for="email">Email address:</label>
+                                <label htmlFor="email">Email address:</label>
                                 <input
                                     type="email"
                                     className="form-control"
@@ -74,7 +74,7 @@ class Register extends Component {
                                 }
                             </div>
                             <div className="form-group">
-                                <label for="password">Password:</label>
+                                <label htmlFor="password">Password:</label>
                                 <input
                                     type="password"
                                     className="form-control"
@@ -90,7 +90,7 @@ class Register extends Component {
                                 }
                             </div>
                             <div className="form-group">
-                                <label for="password_confirmation">Confirm Password:</label>
+                                <label htmlFor="password_confirmation">Confirm Password:</label>
                                 <input
                                     type="password"
                                     className="form-control"

@@ -40,6 +40,7 @@ class DataTableInstitutions extends Component{
                                 idInstitution={institution.id}
                                 textModalButton="Editar" 
                                 titleModal="Formulario Edición Instituciones"
+                                sendData={this.props.sendData}
                             />
             }
 
@@ -51,15 +52,12 @@ class DataTableInstitutions extends Component{
     }
 
     componentDidUpdate(prevProps, prevState, snapshot){
-        console.log("componentDidUpdate");
         if(prevProps.institutions !== this.props.institutions){
-            console.log(this.props.institutions);
            this.loadDataTable(this.props.institutions);
         }
     }
 
-    render(){
-        console.log("render clase DataTableInstitutions");      
+    render(){      
         return(
             <div>
                 <MDBDataTableV5

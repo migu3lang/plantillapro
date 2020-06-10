@@ -8,6 +8,9 @@ export default {
         return Api().get("/institutions/getAllInstitutions");
     },
     getInstitution(idInstitution){
-        return Api().post("/institutions/getInstitution",idInstitution);
+        return Api().post("/institutions/getInstitution",{'idInstitution': idInstitution});
+    },
+    editInstitution(form){
+        return Api().post("/institutions/editInstitution",form);
     }
 }

@@ -15,7 +15,7 @@ class Public extends Component {
           <Navbar/>
           <Switch>
           <Route exact path="/" component={Welcome} />
-          <div className="container">
+          <div className="container-fluid">
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
           </div>

@@ -4,6 +4,8 @@ import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalF
 
 class ModalEditInstitutions extends Component {
 
+  editInfo= {}
+
   constructor(props){
       super();
       this.state = {
@@ -21,8 +23,7 @@ class ModalEditInstitutions extends Component {
 
 
   loadInstitution(idInstitution){
-    console.log("idInstitution: " + idInstitution);
-    InstitutionsApi.getInstitution({'idInstitution': idInstitution})
+    InstitutionsApi.getInstitution(idInstitution)
     .then(response => {
       var institution = response.data.institution;
 
@@ -32,8 +33,8 @@ class ModalEditInstitutions extends Component {
         institutionInfo: institution.institutionInfo
       };
 
+      this.editInfo = initialForm;
       this.setState({form: initialForm});
-      console.log(this.state.form);
     })
     .catch(error => {
       console.log(error);
@@ -50,38 +51,26 @@ class ModalEditInstitutions extends Component {
   }
 
   autoCarga=(e)=>{
-      this.setState({
-        form:{          
-          [e.target.name]: e.target.value
-        }
-      });
-
-      //this.state.form[element] = e.target.value;
+    this.editInfo[e.target.name] = e.target.value;
+    this.setState({form: this.editInfo});
   }
 
   submit = (e) => {
       e.preventDefault();
-
-      // Institutions.newInstitution(this.state.form)
-      // .then(Response => {
-      //     this.toggle();
-      //     this.props.sendData();
-      // })
-      // .catch(error => { 
-      //     if (error.response.status === 422) {
-      //         this.setState({errors:error.response.data.errors});
-      //     }
-      // });
-
+      InstitutionsApi.editInstitution(this.state.form)
+      .then(response => {
+          this.toggle();
+          this.props.sendData();
+      })
+      .catch(error => { 
+          if (error.response.status === 422) {
+              this.setState({errors:error.response.data.errors});
+          }
+      });
   }
 
   clear = () => {
       this.setState({
-          form:{
-            idInstitution: "",
-            institutionName: "",
-            institutionInfo: ""
-          },
           errors: []
       });
   }
@@ -111,7 +100,7 @@ class ModalEditInstitutions extends Component {
                     <div className="form-group">
                         <label htmlFor="institutionInfo">Información institución</label>
                         <textarea className="form-control" name="institutionInfo" rows="3"
-                            onChange={this.autoCarga} 
+                            onChange={this.autoCarga} value={this.state.form.institutionInfo}
                         ></textarea>
                         {this.state.errors.institutionInfo != null ? 
                             <span className="text-danger" >

@@ -12,7 +12,6 @@ class Institutions extends Component{
 
     constructor(){
         super();
-      console.log("crea clase Institutions");
       this.sendData = this.sendData.bind(this);
     }
 
@@ -35,7 +34,6 @@ class Institutions extends Component{
     }
 
     render(){
-      console.log("render clase Institutions");
         return(
             <div className="card">
                 <div className="card-header">
@@ -47,7 +45,7 @@ class Institutions extends Component{
                         titleModal="Formulario creación instituciones"
                         sendData={this.sendData}
                     />
-                    <DataTableInstitutions institutions={this.state.institutions}/>
+                    <DataTableInstitutions institutions={this.state.institutions} sendData={this.sendData}/>
                 </div>
             </div>
         );
