@@ -7,7 +7,9 @@ import InstitutionsApi from '../../apis/Institutions';
 class Institutions extends Component{
 
     state = {
-        institutions: {}
+        institutions: {},
+        show:false
+
     }
 
     constructor(){

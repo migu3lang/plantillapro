@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {login} from '../../redux/actions/loggingActions';
+import {getRoles} from '../../redux/actions/rolesActions';
+import {getModulos} from '../../redux/actions/modulosActions';
+
 import User from '../../apis/User';
 
 class Login extends Component {
@@ -26,10 +29,15 @@ class Login extends Component {
     login=(e)=>{
         e.preventDefault()
 
+        
         User.login(this.state.form)
         .then(response => {
-            this.props.login(response.data);
+            this.props.login(response.data.token);
+            this.props.getRoles(response.data.roles);
+            this.props.getModulos(response.data.modulos);
+            //console.log(response.data.modulos)
             this.props.history.push('/');
+
         })
         .catch(error => {
           if ( error.response.status === 422) {
@@ -97,11 +105,15 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    isLogged: state.isLogged
+    isLogged: state.isLogged,
+    roles:state.roles
 });
 
 const mapDispatchToProps = {
     login,
+    getRoles,
+    getModulos
+
 };
 
 export default withRouter(
