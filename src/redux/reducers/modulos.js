@@ -6,15 +6,15 @@ function reducer(state = defaultState, action){
     switch(action.type){
         case getModuloType: {
 
-            localStorage.setItem("modulos", action.modulos);
-                state=action.modulos;
-           
-                return state;
+            localStorage.setItem("modulos",JSON.stringify(action.modulos));
+               // state.push(action.modulos);
+            //    return state;
         }
      
         default:
             if(localStorage.modulos != null){
-                state = localStorage.modulos;
+                
+                state=JSON.parse(localStorage.modulos);
             }
             return state;
     }
