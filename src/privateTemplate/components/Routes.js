@@ -11,23 +11,18 @@ import { connect } from 'react-redux';
 
 class Routes extends React.Component {
 
-  
   verificarModulos=(nombreModulo)=>{
     var validator=this.props.modulos.find(modulo=>modulo.nombreModulo === nombreModulo);
 
-   
-   if( typeof validator === 'undefined'){
-
-        return false;
-   }else{
-     return true;
-   }
+    if( typeof validator === 'undefined'){
+      return false;
+    }else{
+      return true;
+    }
 
   }
 
   render() {
-     
-      console.log(this.verificarModulos('institutions'))
     return (
       <Switch>
         <Route path='/' exact component={DashboardPage} />
@@ -35,11 +30,8 @@ class Routes extends React.Component {
         <Route path='/profile' component={ProfilePage} />
         <Route path='/tables' component={TablesPage} />
         <Route path='/maps' component={MapsPage} />
-        
         <Route path='/404' component={NotFoundPage} />
-
-    { this.verificarModulos('institutions') ? <Route path='/institutions' component={Institutions} /> :  <Route path='/institutions' component={DashboardPage} /> }
-
+        <Route path='/institutions' component={this.verificarModulos('institutions') ? Institutions : DashboardPage} />
         <Route path='/areas' component={Areas} />
       </Switch>
     );
