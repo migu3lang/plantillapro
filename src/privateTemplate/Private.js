@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 class Private extends Component {
   
   render() {
-   
     return (
         <div className="flexible-content">
           <TopNavigation />

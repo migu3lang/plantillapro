@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from 'redux';
-import isLogged from './reducers/isLogged'
-import roles from './reducers/roles'
+import isLogged from './reducers/isLogged';
+import roles from './reducers/roles';
 import modulos from './reducers/modulos';
 
 const reducer = combineReducers({

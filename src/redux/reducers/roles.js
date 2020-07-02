@@ -5,18 +5,15 @@ function reducer(state = defaultState, action){
    
     switch(action.type){
         case getRoletype: {
-
-            localStorage.setItem("roles", action.roles);
-                state=action.roles;
-           
-                return state;
+            localStorage.setItem("roles", JSON.stringify(action.roles));
+            return JSON.parse(localStorage.roles);
         }
-     
-        default:
+        default:{
             if(localStorage.roles != null){
-                state = localStorage.roles;
+                state = JSON.parse(localStorage.roles);
             }
             return state;
+        }
     }
 }
 

@@ -35,9 +35,7 @@ class Login extends Component {
             this.props.login(response.data.token);
             this.props.getRoles(response.data.roles);
             this.props.getModulos(response.data.modulos);
-            //console.log(response.data.modulos)
             this.props.history.push('/');
-
         })
         .catch(error => {
           if ( error.response.status === 422) {
