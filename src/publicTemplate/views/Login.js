@@ -9,6 +9,10 @@ import User from '../../apis/User';
 
 class Login extends Component {
 
+    loginInfo= {
+        device_name: "browser"
+    };
+
     constructor() {
         super();
         this.state = {
@@ -22,8 +26,10 @@ class Login extends Component {
     }
 
     autoCarga=(e)=>{
-        const element = e.target.name;
-        this.state.form[element] = e.target.value;
+        this.loginInfo[e.target.name] = e.target.value;
+        this.setState({form: this.loginInfo});
+        // const element = e.target.name;
+        // this.state.form[element] = e.target.value;
     }
 
     login=(e)=>{

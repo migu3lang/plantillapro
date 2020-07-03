@@ -8,7 +8,7 @@ class DataTableInstitutions extends Component{
         dataTable: {}
     }
     
-    loadDataTable(institutions){
+    loadDataTable=(institutions)=>{
         var dataTableTemp = {
             columns: [
                 {

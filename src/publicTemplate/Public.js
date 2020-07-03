@@ -14,11 +14,11 @@ class Public extends Component {
         <div className="App">
           <Navbar/>
           <Switch>
-          <Route exact path="/" component={Welcome} />
-          <div className="container-fluid">
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-          </div>
+            <Route exact path="/" component={Welcome} />
+            <div className="container-fluid">
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+            </div>
           </Switch>
         </div>
     )

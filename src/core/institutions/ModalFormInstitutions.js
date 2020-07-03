@@ -4,6 +4,8 @@ import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalF
 
 class ModalPage extends Component {
 
+    institutionInfo= {};
+
     state = {
         modal: false,
         textModalButton: "Modal",
@@ -29,8 +31,10 @@ class ModalPage extends Component {
     }
 
     autoCarga=(e)=>{
-        const element = e.target.name;
-        this.state.form[element] = e.target.value;
+        this.institutionInfo[e.target.name] = e.target.value;
+        this.setState({form: this.institutionInfo});
+        // const element = e.target.name;
+        // this.state.form[element] = e.target.value;
     }
 
     submit = (e) => {

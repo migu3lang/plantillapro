@@ -3,6 +3,8 @@ import User from '../../apis/User';
 
 class Register extends Component {
 
+    userInfo= {};
+
     constructor(){
         super();
         this.state={
@@ -17,8 +19,10 @@ class Register extends Component {
     }
 
     autoCarga=(e)=>{
-        const element = e.target.name;
-        this.state.form[element] = e.target.value;
+        this.userInfo[e.target.name] = e.target.value;
+        this.setState({form: this.userInfo});
+        // const element = e.target.name;
+        // this.state.form[element] = e.target.value;
     }
 
     register=(e)=>{
