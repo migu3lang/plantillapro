@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import logo from "../assets/mdb-react.png";
 import { MDBListGroup, MDBListGroupItem, MDBIcon } from 'mdbreact';
 import { NavLink } from 'react-router-dom';
 
+import {findModule} from '../../helpers/findModule';
+
+import logo from "../assets/mdb-react.png";
+
+
+
 class sideNavigation extends Component {
 
-    verificarModulos=(nombreModulo)=>{
-        var validator=this.props.modulos.find(modulo=>modulo.nombreModulo === nombreModulo);
-
-        if( typeof validator === 'undefined'){
-            return false;
-        }else{
-            return true;
-        }
-    }
-
     render(){
-        
         return (
             <div className="sidebar-fixed position-fixed">
                 <a href="#!" className="logo-wrapper waves-effect">
@@ -55,7 +48,7 @@ class sideNavigation extends Component {
                             404
                         </MDBListGroupItem>
                     </NavLink>
-                    {this.verificarModulos("institutions") ?
+                    {findModule(this.props.modulos, "institutions") ?
                         <NavLink to="/institutions" activeClassName="activeClass">
                             <MDBListGroupItem>
                                 <MDBIcon icon="university" className="mr-3"/>
