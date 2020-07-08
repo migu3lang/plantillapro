@@ -23,7 +23,7 @@ class TopNavigation extends Component {
         e.preventDefault();
     
         User.logout().then(() => {
-          this.props.logOut('token');
+          this.props.logOut();
           this.props.history.push('/');
         });
         

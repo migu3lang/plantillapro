@@ -12,6 +12,8 @@ function reducer(state = defaultState, action){
         }
         case logOutType: {
             localStorage.removeItem("token");
+            localStorage.removeItem("modulos");
+            localStorage.removeItem("roles");
             state = false;
             return state;
         }
