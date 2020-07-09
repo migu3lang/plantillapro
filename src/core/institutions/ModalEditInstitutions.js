@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import InstitutionsApi from '../../apis/Institutions';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 
+// ES6 Modules or TypeScript
+import Swal from 'sweetalert2';
+
 class ModalEditInstitutions extends Component {
 
   editInfo= {}
@@ -47,26 +50,15 @@ class ModalEditInstitutions extends Component {
     });
     
     this.clear();
-    this.loadInstitution(this.props.idInstitution);
+    if(!this.state.modal){
+      this.loadInstitution(this.props.idInstitution);
+    }
+    
   }
 
   autoCarga=(e)=>{
     this.editInfo[e.target.name] = e.target.value;
     this.setState({form: this.editInfo});
-  }
-
-  submit = (e) => {
-      e.preventDefault();
-      InstitutionsApi.editInstitution(this.state.form)
-      .then(response => {
-          this.toggle();
-          this.props.sendData();
-      })
-      .catch(error => { 
-          if (error.response.status === 422) {
-              this.setState({errors:error.response.data.errors});
-          }
-      });
   }
 
   clear = () => {
@@ -75,6 +67,50 @@ class ModalEditInstitutions extends Component {
       });
   }
 
+  submit = (e) => {
+    e.preventDefault();
+    InstitutionsApi.editInstitution(this.state.form)
+    .then(response => {
+        this.toggle();
+        this.props.sendData();
+    })
+    .catch(error => { 
+        if (error.response.status === 422) {
+            this.setState({errors:error.response.data.errors});
+        }
+    });
+  }
+
+  delete = (e) => {
+    e.preventDefault();
+
+    Swal.fire({
+      title: '¿Está seguro de eliminar este elemento?',
+      text: "¡No podrá revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        InstitutionsApi.deleteInstitution(this.state.form.idInstitution)
+        .then(response => {
+            this.toggle();
+            Swal.fire(
+              'Eliminado!',
+              'El elemento seleccionados ha sido eliminado.',
+              'success'
+            );
+            this.props.sendData();
+        })
+        .catch(error => { 
+            console.log(error);
+        });
+      }
+    });
+  }
 
   render() {
     return (
@@ -113,8 +149,9 @@ class ModalEditInstitutions extends Component {
                 </form>
             </MDBModalBody>
             <MDBModalFooter>
-                <MDBBtn color="secondary" onClick={this.toggle}>Cerrar</MDBBtn>
-                <MDBBtn color="primary" onClick={this.submit}>Guardar</MDBBtn>
+              <MDBBtn color="danger" onClick={this.delete}>Eliminar</MDBBtn>
+              <MDBBtn color="secondary" onClick={this.toggle}>Cancelar</MDBBtn>
+              <MDBBtn color="primary" onClick={this.submit}>Actualizar</MDBBtn>
             </MDBModalFooter>
         </MDBModal>
     </MDBContainer>

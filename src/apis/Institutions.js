@@ -12,5 +12,11 @@ export default {
     },
     editInstitution(form){
         return Api().post("/institutions/editInstitution",form);
+    },
+    deleteInstitution(idInstitution){
+        return Api().post("/institutions/deleteInstitution",{'idInstitution': idInstitution});
+    },
+    deleteMultipleInstitutions(arrayIdInstitutions){
+        return Api().post("/institutions/deleteMultipleInstitutions",{'arrayIdInstitutions': arrayIdInstitutions});
     }
 }

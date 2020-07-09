@@ -28,9 +28,7 @@ class Institutions extends Component{
           this.setState({institutions: Response.data.institutions});
         }).catch(error => {
             console.log("institutions: " + error);
-            if(error.response.status === 401){
-                this.props.history.push('/');
-            }
+            this.props.history.push('/');
         });
 
     }
