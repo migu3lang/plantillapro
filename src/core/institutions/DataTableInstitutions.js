@@ -89,10 +89,17 @@ class DataTableInstitutions extends Component{
     cleanCheckboxes(){
         this.globalCheckboxes=[];
         this.setState({checkboxes: this.globalCheckboxes});
+
+        var arrayCheck = Array.from(document.getElementsByClassName('elements'));
+        
+        arrayCheck.forEach( el => {
+            el.checked = false;
+        });
     }
 
     delete=(e)=>{
         e.preventDefault();
+        
         Swal.fire({
             title: '¿Está seguro de eliminar los elementos seleccionados?',
             text: "¡No podrá revertir esto!",
