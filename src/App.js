@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Private from './privateTemplate/Private';
-import Public from './publicTemplate/Public';
+//import Private from './privateTemplate/Private';
+import Private from './privateTemplate2/Private';
+//import Public from './publicTemplate/Public';
+import Public from './publicTemplate2/Public';
 
 class App extends Component {
   
