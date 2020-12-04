@@ -12,7 +12,7 @@ import Sidebar from "../components/Sidebar/Sidebar.js";
 import FixedPlugin from "../components/FixedPlugin/FixedPlugin.js";
 
 //import dashboardRoutes from "../routes.js";
-import routesAdmin from "../routes";
+import routesDashBoard from "../routes";
 //assets
 import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 import bgImage from "../assets/img/sidebar-2.jpg";
@@ -20,8 +20,6 @@ import logo from '../assets/img/reactlogo.png';
 //redux
 import { connect } from 'react-redux';
 import {handleFixedPlugin} from '../../redux/actions/fixedPluginActions';
-import {loadPreicfesRoutes} from '../../redux/actions/dashBoardRoutesActions';
-
 
 let ps;
 
@@ -37,15 +35,15 @@ function Admin(props) {
   const [color, setColor] = React.useState("blue");
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [routes, setRoutes] = React.useState(routesAdmin);;
+  const routes = routesDashBoard();
   const switchRoutes = (
     <Switch>
-      {routes.map((prop, key) => {
-        if (prop.layout === "/admin") {
+      {routes.map((route, key) => {
+        if (route.layout === "/admin") {
           return (
             <Route
-              path={prop.layout + prop.path}
-              component={prop.component}
+              path={route.layout + route.path}
+              component={route.component}
               key={key}
             />
           );
@@ -81,14 +79,6 @@ function Admin(props) {
     }
   };
 
-  React.useEffect(() => {
-    
-    const carga = () => {
-      props.loadPreicfesRoutes();
-      setRoutes(props.dashBoardRoutes);
-    }
-    return carga();
-  },[]);
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
     if (navigator.platform.indexOf("Win") > -1) {
@@ -150,13 +140,11 @@ function Admin(props) {
 
 const mapStateToProps = (state) => ({
   fixedPluginOpen: state.fixedPluginOpen,
-  dashBoardRoutes: state.dashBoardRoutes,
   modulos: state.modulos
 });
 
 const mapDispatchToProps = {
   handleFixedPlugin,
-  loadPreicfesRoutes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Admin);
