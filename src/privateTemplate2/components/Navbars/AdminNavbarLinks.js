@@ -20,10 +20,11 @@ import CustomInput from "../../components/CustomInput/CustomInput.js";
 import Button from "../../components/CustomButtons/Button.js";
 
 import styles from "../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
-//reux
+//redux
 import { connect } from 'react-redux';
 import {logOut} from '../../../redux/actions/loggingActions';
 import { withRouter } from 'react-router-dom';
+import {handleFixedPlugin} from '../../../redux/actions/fixedPluginActions';
 // user function logout
 import User from '../../../apis/User';
 
@@ -62,6 +63,10 @@ function AdminNavbarLinks(props) {
       props.history.push('/');
     });
     
+  };
+  const showFixedPlugin = () => {
+    setOpenProfile(null);
+    props.handleFixedPlugin();
   }
   return (
     <div>
@@ -216,7 +221,7 @@ function AdminNavbarLinks(props) {
                       Profile
                     </MenuItem>
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={showFixedPlugin}
                       className={classes.dropdownItem}
                     >
                       Settings
@@ -245,6 +250,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   logOut,
+  handleFixedPlugin
 };
 
 export default withRouter(

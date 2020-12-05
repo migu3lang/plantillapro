@@ -11,37 +11,21 @@ import Footer from "../components/Footer/Footer.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 import FixedPlugin from "../components/FixedPlugin/FixedPlugin.js";
 
-import routes from "../routes.js";
-
+//import dashboardRoutes from "../routes.js";
+import routesDashBoard from "../routes";
+//assets
 import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
-
 import bgImage from "../assets/img/sidebar-2.jpg";
-//import logo from "assets/img/reactlogo.png";
 import logo from '../assets/img/reactlogo.png';
+//redux
+import { connect } from 'react-redux';
+import {handleFixedPlugin} from '../../redux/actions/fixedPluginActions';
 
 let ps;
 
-const switchRoutes = (
-  <Switch>
-    {routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
-      }
-      return null;
-    })}
-    <Redirect from="/admin" to="/admin/dashboard" />
-  </Switch>
-);
-
 const useStyles = makeStyles(styles);
 
-export default function Admin({ ...rest }) {
+function Admin(props) {
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
@@ -51,6 +35,24 @@ export default function Admin({ ...rest }) {
   const [color, setColor] = React.useState("blue");
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const routes = routesDashBoard();
+  const switchRoutes = (
+    <Switch>
+      {routes.map((route, key) => {
+        if (route.layout === "/admin") {
+          return (
+            <Route
+              path={route.layout + route.path}
+              component={route.component}
+              key={key}
+            />
+          );
+        }
+        return null;
+      })}
+      <Redirect from="/admin" to="/admin/dashboard" />
+    </Switch>
+  );
   const handleImageClick = image => {
     setImage(image);
   };
@@ -62,6 +64,7 @@ export default function Admin({ ...rest }) {
       setFixedClasses("dropdown show");
     } else {
       setFixedClasses("dropdown");
+      props.handleFixedPlugin();
     }
   };
   const handleDrawerToggle = () => {
@@ -75,6 +78,7 @@ export default function Admin({ ...rest }) {
       setMobileOpen(false);
     }
   };
+
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
     if (navigator.platform.indexOf("Win") > -1) {
@@ -103,13 +107,11 @@ export default function Admin({ ...rest }) {
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
         color={color}
-        {...rest}
       />
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
           routes={routes}
           handleDrawerToggle={handleDrawerToggle}
-          {...rest}
         />
         {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
         {getRoute() ? (
@@ -120,15 +122,29 @@ export default function Admin({ ...rest }) {
           <div className={classes.map}>{switchRoutes}</div>
         )}
         {getRoute() ? <Footer /> : null}
-        <FixedPlugin
+        {props.fixedPluginOpen ? <FixedPlugin
           handleImageClick={handleImageClick}
           handleColorClick={handleColorClick}
           bgColor={color}
           bgImage={image}
           handleFixedClick={handleFixedClick}
           fixedClasses={fixedClasses}
-        />
+          /> 
+          :
+          null
+        }
       </div>
     </div>
   );
 }
+
+const mapStateToProps = (state) => ({
+  fixedPluginOpen: state.fixedPluginOpen,
+  modulos: state.modulos
+});
+
+const mapDispatchToProps = {
+  handleFixedPlugin,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admin);

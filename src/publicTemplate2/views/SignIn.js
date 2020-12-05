@@ -12,7 +12,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 // redux
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import {login} from '../../redux/actions/loggingActions';
 import {getRoles} from '../../redux/actions/rolesActions';
 import {getModulos} from '../../redux/actions/modulosActions';
