@@ -37,7 +37,7 @@ import Institutions from '../core/institutions/Institutions';
 import {findModule} from '../helpers/findModule';
 
 const dashboardRoutes = (() => {
-  let user = [];
+  let userModules = [];
   let routes = [
     {
       path: "/dashboard",
@@ -90,11 +90,11 @@ const dashboardRoutes = (() => {
     },
   ]
   if (localStorage.modulos != null) {
-    user = JSON.parse(localStorage.modulos);
+    userModules = JSON.parse(localStorage.modulos);
   }
   
   preicfesRoutes.map((preicfesModule, key)=>{
-    if(findModule(user,preicfesModule.name)){
+    if(findModule(userModules,preicfesModule.name)){
       routes.push(preicfesModule);
     }
   });
