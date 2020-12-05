@@ -108,6 +108,15 @@ const dashboardRoutes = [
     icon: Unarchive,
     component: UpgradeToPro,
     layout: "/admin"
+  },
+
+  {
+    path: "/nachi",
+    name: "nachi",
+    rtlName: "التطور للاحترافية",
+    icon: Unarchive,
+    component: NotificationsPage,
+    layout: "/admin"
   }
 ];
 
