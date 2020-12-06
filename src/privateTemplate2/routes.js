@@ -5,6 +5,7 @@ import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import BubbleChart from "@material-ui/icons/BubbleChart";
 import LocationOn from "@material-ui/icons/LocationOn";
 import Notifications from "@material-ui/icons/Notifications";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 // core components/views for Admin layout
 import DashboardPage from "./views/Dashboard/Dashboard.js";
@@ -18,6 +19,7 @@ import NotificationsPage from "./views/Notifications/Notifications.js";
 //core components preicfes
 import Institutions from '../core/institutions/Institutions';
 import {findModule} from '../helpers/findModule';
+import Clients from "../core/clients/Clients";
 
 const dashboardRoutes = (() => {
   let userModules = [];
@@ -91,6 +93,14 @@ const preicfesRoutes = [
     name: "institutions",
     icon: Notifications,
     component: Institutions,
+    layout: "/admin"
+  },
+
+  {
+    path: "/clients",
+    name: "clients",
+    icon: AccountCircleIcon,
+    component: Clients,
     layout: "/admin"
   },
 ];
