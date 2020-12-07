@@ -20,6 +20,7 @@ import logo from '../assets/img/reactlogo.png';
 //redux
 import { connect } from 'react-redux';
 import {handleFixedPlugin} from '../../redux/actions/fixedPluginActions';
+import Institutions from "../../apis/Institutions.js";
 
 let ps;
 
@@ -49,10 +50,17 @@ function Admin(props) {
           );
         }
         return null;
-      })}
+      })
+      }
+      
+
       <Redirect from="/admin" to="/admin/dashboard" />
+      
+
     </Switch>
   );
+
+ 
   const handleImageClick = image => {
     setImage(image);
   };
@@ -113,6 +121,8 @@ function Admin(props) {
           routes={routes}
           handleDrawerToggle={handleDrawerToggle}
         />
+
+       
         {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
         {getRoute() ? (
           <div className={classes.content}>

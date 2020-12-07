@@ -20,6 +20,7 @@ import NotificationsPage from "./views/Notifications/Notifications.js";
 import Institutions from '../core/institutions/Institutions';
 import {findModule} from '../helpers/findModule';
 import Clients from "../core/clients/Clients";
+import General from "../core/clients/General";
 
 const dashboardRoutes = (() => {
   let userModules = [];
@@ -71,6 +72,14 @@ const dashboardRoutes = (() => {
       name: "Notifications",
       icon: Notifications,
       component: NotificationsPage,
+      layout: "/admin"
+    },
+
+    {
+      path: "/testeo",
+      name: "Notifications",
+      icon: Notifications,
+      component: General,
       layout: "/admin"
     },
   ]

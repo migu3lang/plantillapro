@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import clientsApi from '../../apis/Clients';
 import ModalClient from './ModalClient';
+import { Switch, Route,Link , NavLink , BrowserRouter as Router , Redirect} from 'react-router-dom';
+import Institutions from '../institutions/Institutions';
 
 
 function Clients() {
@@ -32,9 +34,13 @@ function Clients() {
                 sendData={sendData}
                 ></ModalClient>
 
-                </div>
+               <NavLink to="/admin/about">nacho</NavLink>
+
             </div>
 
+              
+
+                </div>
         </div>
     )
 }
