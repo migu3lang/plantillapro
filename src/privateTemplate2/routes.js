@@ -18,6 +18,12 @@ import NotificationsPage from "./views/Notifications/Notifications.js";
 
 //core components preicfes
 import Institutions from '../core/institutions/Institutions';
+import Prueba from '../core/prueba';
+import Hijo from '../core/hijo';
+import Hijo2 from '../core/hijo2';
+import ClientsModules from '../core/clients/ClientsModules';
+
+//helper
 import {findModule} from '../helpers/findModule';
 import Clients from "../core/clients/Clients";
 import General from "../core/clients/General";
@@ -74,13 +80,26 @@ const dashboardRoutes = (() => {
       component: NotificationsPage,
       layout: "/admin"
     },
-
     {
-      path: "/testeo",
-      name: "Notifications",
+      path: "/prueba",
+      name: "prueba",
       icon: Notifications,
-      component: General,
-      layout: "/admin"
+      component: Prueba,
+      layout: "/admin",
+      sons:[
+        {
+          path: "/admin/hijo",
+          component: Hijo
+        },
+        {
+          path: "/admin/hijo2",
+          component: Hijo2
+        },
+        {
+          path: "/admin/modules",
+          component: ClientsModules
+        },
+      ]
     },
   ]
   if (localStorage.modulos != null) {

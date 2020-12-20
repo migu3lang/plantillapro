@@ -37,30 +37,39 @@ function Admin(props) {
   const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const routes = routesDashBoard();
-  const switchRoutes = (
-    <Switch>
-      {routes.map((route, key) => {
-        if (route.layout === "/admin") {
-          return (
-            <Route
-              path={route.layout + route.path}
-              component={route.component}
-              key={key}
-            />
-          );
+  //// switchRoutes
+  const switchRoutes = () => {
+    let switchRoutes = [];
+    routes.map((route, key) => {
+      if (route.layout === "/admin") {
+        switchRoutes.push(
+          <Route
+            path={route.layout + route.path}
+            component={route.component}
+            key={key + route.path}
+          />
+        );
+        if(route.sons != null){
+          route.sons.map((son, key) => {
+            switchRoutes.push(
+              <Route
+                path={son.path}
+                //component={son.component}
+                key={key + son.path}
+                render={(props) => <son.component {...props} title={key} />}
+              />
+            );
+          })
         }
-        return null;
-      })
       }
-      
-
+    })
+    return(
+    <Switch>
+      {switchRoutes}
       <Redirect from="/admin" to="/admin/dashboard" />
-      
-
-    </Switch>
-  );
-
- 
+    </Switch>)
+  };
+  //// switchRoutes
   const handleImageClick = image => {
     setImage(image);
   };
@@ -126,10 +135,10 @@ function Admin(props) {
         {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
         {getRoute() ? (
           <div className={classes.content}>
-            <div className={classes.container}>{switchRoutes}</div>
+            <div className={classes.container}>{switchRoutes()}</div>
           </div>
         ) : (
-          <div className={classes.map}>{switchRoutes}</div>
+          <div className={classes.map}>{switchRoutes()}</div>
         )}
         {getRoute() ? <Footer /> : null}
         {props.fixedPluginOpen ? <FixedPlugin
