@@ -9,6 +9,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { render } from 'react-dom';
+import Api from '../../apis/Api';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,12 +80,21 @@ export default function ClientsModules(props) {
 
   }, []);
 
+  function save(){
+    
+    clientsApi.saveModules(props.location.state.id,{modules:globalCheckboxes}).
+    then((response)=>{
+      console.log(response.data);
+    }).catch((error)=>{
+      console.log(error.data);
+    })
+  }
+
   const elementos = (() => {
     var element = [];
     
     if(modulesActive.length>0)
      {
-
         for(var i=0; i<modules.length ; i++)
         {
             for(var j=0; j<modulesActive.length ; j++){
@@ -104,7 +114,6 @@ export default function ClientsModules(props) {
                              onChange={handleChange}   />}
                               label={modules[i].nombreModulo}
                             />)
-                          
 
               }
 
@@ -112,34 +121,6 @@ export default function ClientsModules(props) {
         }
 
       }  
-
-  //   if(modulesActive.length>0)
-  //   {
-
-  //     while(i < modules.length ){
-      
-  //     if(modules[i].id == modulesActive[j].modulo_id){
-          
-  //         element.push( <FormControlLabel key={i}
-  //           control={<Checkbox  name="varo"  defaultChecked={true}  />}
-  //           label={modules[i].nombreModulo}
-  //         />)
-  //         j++
-  //         i++
-  //         }else{
-
-  //           element.push( <FormControlLabel key={i}
-  //             control={<Checkbox  name="varo"   />}
-  //             label={modules[i].nombreModulo}
-  //           />)
-  //           i++
-            
-  //         }
-
-                      
-  //     }
-
-  // }
 
     
     return element
@@ -153,8 +134,10 @@ export default function ClientsModules(props) {
 
 
   return (
+    <form>
     <div className={classes.root}>
-      {console.log(globalCheckboxes)}
+    
+    
       <FormControl component="fieldset" className={classes.formControl}>
         <FormLabel component="legend">Assign responsibility</FormLabel>
         <FormGroup>
@@ -172,31 +155,11 @@ export default function ClientsModules(props) {
       </FormControl>
 
     </div>
+
+    <button className="btn btn-primary" type="button" onClick={save}>Guardar</button>
+    </form>
   );
 
 
 }
 
-// var a=[1,2,3,4,5]
-
-// var b=[1,2]
-
-// var salida=[]
-
-// for(i=0; i<a.length ; i++)
-// {
-//     for(j=0; j<b.length ; j++)
-//     {
-//         if(a[i]==b[j])
-//         {
-//             salida.push('check');
-//             i++
-//         }
-
-//     }
-
-//     salida.push('no check');
-
-// }
-
-// console.log(salida)
