@@ -46,7 +46,7 @@ function Clients() {
                 ></ModalClient>
               {console.log(clients)}
               {clients.length>0 ?
-                <DataTableClients clients={clients}></DataTableClients> : null
+                <DataTableClients clients={clients} sendData={sendData}></DataTableClients> : null
               }
             </div>
 

@@ -14,5 +14,9 @@ export default {
 
     saveModules(admincliente,form){
             return Api().post("/clients/mas/"+admincliente,form);
+    },
+
+    editClient(admincliente,form){
+        return Api().post("/clients/edit/"+admincliente,form);
     }
 }

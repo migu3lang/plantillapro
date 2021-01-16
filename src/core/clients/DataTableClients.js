@@ -3,6 +3,7 @@ import { MDBDataTableV5 } from 'mdbreact';
 import DataTableInstitutions from '../institutions/DataTableInstitutions';
 import { Switch, Route,Link , NavLink , BrowserRouter as Router , Redirect} from 'react-router-dom';
 import ClientsModules from './ClientsModules';
+import ModalEdit from "./ModalEditClients";
 
 
 export default function DataTableClients(props) {
@@ -46,8 +47,10 @@ export default function DataTableClients(props) {
           var row ={
               name:client.name,
               email:client.email,
-              phone:'3192225461',
-              action:<button className="btn btn-primary"><Link to={{pathname:'/admin/modules', state:{id:client.id}}}>Modulos</Link></button>
+              phone:client.telefono,
+              action:<div>
+                <ModalEdit cliente={client} sendData={props.sendData}></ModalEdit>
+                <button className="btn btn-primary"><Link to={{pathname:'/admin/modules', state:{id:client.id}}}>Modulos</Link></button></div>
             }
             data.rows.push(row);
            
