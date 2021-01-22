@@ -24,7 +24,7 @@ import Hijo2 from '../core/hijo2';
 
 //helper
 import {findModule} from '../helpers/findModule';
-import Clients from "../core/clients/Clients";
+import Clients from "../core/clients/clients";
 
 const dashboardRoutes = (() => {
   let userModules = [];
