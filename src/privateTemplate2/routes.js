@@ -25,14 +25,10 @@ import ClientsModules from '../core/clients/ClientsModules';
 
 //helper
 import {findModule} from '../helpers/findModule';
-<<<<<<< HEAD
-import Clients from "../core/clients/clients";
-=======
 import Clients from "../core/clients/Clients";
 import Roles from "../core/roles/Roles";
 import General from "../core/clients/General";
 import CreateRol from "../core/roles/CreateRol";
->>>>>>> 81aa38e0ad194c99f6b6c9e70ebf7e3e9fd99bd2
 
 const dashboardRoutes = (() => {
   let userModules = [];
