@@ -1,5 +1,6 @@
 import React from 'react';
 import {Route, Switch, Redirect } from 'react-router-dom';
+import Institutions from '../core/institutions/Institutions';
 
 // core components
 import Admin from './layouts/Admin';
@@ -10,7 +11,12 @@ function Private() {
     return (
         <Switch>
             <Route path="/admin" component={Admin} />
+            {/* <Route path="admin/about">
+            <Institutions></Institutions>
+          </Route> */}
             <Redirect from="/" to="/admin/dashboard" />
+
+
         </Switch>
     )
 }
