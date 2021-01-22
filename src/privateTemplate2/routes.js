@@ -26,7 +26,9 @@ import ClientsModules from '../core/clients/ClientsModules';
 //helper
 import {findModule} from '../helpers/findModule';
 import Clients from "../core/clients/Clients";
+import Roles from "../core/roles/Roles";
 import General from "../core/clients/General";
+import CreateRol from "../core/roles/CreateRol";
 
 const dashboardRoutes = (() => {
   let userModules = [];
@@ -99,6 +101,10 @@ const dashboardRoutes = (() => {
           path: "/admin/modules",
           component: ClientsModules
         },
+        // {
+        //   path:"/admin/roleu",
+        //   component:CreateRol
+        // }
       ]
     },
   ]
@@ -132,6 +138,20 @@ const preicfesRoutes = [
     layout: "/admin"
   },
 
-  
+  {
+    path: "/roles",
+    name: "roles",
+    icon: AccountCircleIcon,
+    component: Roles,
+    layout: "/admin",
+    sons:[
+      {
+        path: "/admin/crear/role",
+        component: CreateRol
+      },
+    ]
+  },
+
+
 ];
 export default dashboardRoutes;
