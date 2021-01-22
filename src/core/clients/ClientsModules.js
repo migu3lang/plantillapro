@@ -26,11 +26,8 @@ const useStyles = makeStyles((theme) => ({
 export default function ClientsModules(props) {
 
   const [modules, setModules] = useState([]);
-  const [modulesActive, setModuleActive] = useState([]);
 
   const [globalCheckboxes,setCheckboxes]=useState([]);
-
-  const [state, setState] = React.useState([]);
 
   function Comparador(elemento, comparar) {
     return elemento != comparar;
@@ -47,9 +44,6 @@ export default function ClientsModules(props) {
       auxCheck = filter;
     }
     setCheckboxes(auxCheck);
-    
-    console.log(globalCheckboxes);
-    
 
   };
 
@@ -58,25 +52,33 @@ export default function ClientsModules(props) {
     function obtener() {
 
       clientsApi.getModulos(props.location.state.id).then((response) => {
-        let moduleAPi = response.data.modulos;
-        let moduleActivosApi = response.data.modulosActivos;
-        setModules(moduleAPi);
-        setModuleActive(moduleActivosApi);
-        
+        let moduleAPi = [];
         let checkboxes=[]
-        moduleActivosApi.map((data) => {
-          
-          checkboxes.push(data.modulo_id);
-        })
+        //mapa modulos de la aplicacion
+        response.data.modulos.map((modulo) => {
+          var data = {
+            id : modulo.id,
+            nombreModulo: modulo.nombreModulo,
+            active: false
+          }
+          // mapa modulos activos
+          response.data.modulosActivos.map((moduloActivo) => {
+            checkboxes.push(moduloActivo.modulo_id);
+            if(modulo.id == moduloActivo.modulo_id){
+              data.active = true;
+            }
+          });
+          moduleAPi.push(data);
+        });
+       
+        setModules(moduleAPi);
         setCheckboxes(checkboxes);
-
 
       })
 
     }
-    //console.log('boxes',globalCheckboxes)
+    
     return obtener();
-
 
   }, []);
 
@@ -91,64 +93,38 @@ export default function ClientsModules(props) {
   }
 
   const elementos = (() => {
-    var element = [];
+    var elements = [];
+   
+    modules.map((modulo) => {
+      if (modulo.active) {
+        elements.push(<FormControlLabel key={modulo.id}
+          control={<Checkbox name={modulo.nombreModulo} value={modulo.id} defaultChecked={true}
+            onChange={handleChange} />}
+          label={modulo.nombreModulo}
+        />)
+      } else {
+        elements.push(<FormControlLabel key={modulo.id}
+          control={<Checkbox name={modulo.nombreModulo} value={modulo.id}
+            onChange={handleChange} />}
+          label={modulo.nombreModulo}
+        />)
+      }
+    });
     
-    if(modulesActive.length>0)
-     {
-        for(var i=0; i<modules.length ; i++)
-        {
-            for(var j=0; j<modulesActive.length ; j++){
-
-              if(modules[i].id == modulesActive[j].modulo_id){
-
-                element.push( <FormControlLabel key={modules[i].id}
-                             control={<Checkbox  name={modules[i].nombreModulo}  value={modules[i].id} defaultChecked={true}
-                             onChange={handleChange}  />}
-                            label={modules[i].nombreModulo}
-                           />)
-
-              }else{
-
-                element.push( <FormControlLabel key={modules[i].id}
-                             control={<Checkbox  name={modules[i].nombreModulo}  value={modules[i].id}
-                             onChange={handleChange}   />}
-                              label={modules[i].nombreModulo}
-                            />)
-
-              }
-
-            }
-        }
-
-      }  
-
-    
-    return element
+    return elements
 
   })
 
-
-
-
   const classes = useStyles();
-
 
   return (
     <form>
     <div className={classes.root}>
-    
-    
       <FormControl component="fieldset" className={classes.formControl}>
         <FormLabel component="legend">Assign responsibility</FormLabel>
         <FormGroup>
 
           {modules.length > 0 ? elementos() : null}
-
-          {/* {modules.length > 0 ? 
-            modules.map((data)=>{
-              return (<h1>hola</h1>)
-            }) : null
-          } */}
 
         </FormGroup>
 
