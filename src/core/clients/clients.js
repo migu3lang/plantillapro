@@ -7,7 +7,7 @@ import DataTableClients from './DataTableClients';
 
 
 function Clients() {
-    
+    //comentario al dia.
     const [clients,setClients]=useState([]);
      const  sendData = (event) => {
          event.preventDefault();
