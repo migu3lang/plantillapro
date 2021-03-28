@@ -36,7 +36,7 @@ export default function ClientsModules(props) {
   const handleChange = (event) => {
 
     let auxCheck=globalCheckboxes;
-
+    
     if (event.target.checked === true) {
       auxCheck.push(parseInt(event.target.value));
     } else if (event.target.checked === false) {
@@ -44,7 +44,7 @@ export default function ClientsModules(props) {
       auxCheck = filter;
     }
     setCheckboxes(auxCheck);
-
+    console.log(auxCheck);
   };
 
   useEffect(() => {
@@ -55,16 +55,21 @@ export default function ClientsModules(props) {
         let moduleAPi = [];
         let checkboxes=[]
         //mapa modulos de la aplicacion
-        response.data.modulos.map((modulo) => {
+        response.data.modulos.map((modulo) => 
+        {
           var data = {
             id : modulo.id,
             nombreModulo: modulo.nombreModulo,
             active: false
           }
-          // mapa modulos activos
+         
           response.data.modulosActivos.map((moduloActivo) => {
-            checkboxes.push(moduloActivo.modulo_id);
+            // if(moduloActivo.modulo_id !=null)
+            // {
+            //   checkboxes.push(moduloActivo.modulo_id);
+            // }
             if(modulo.id == moduloActivo.modulo_id){
+              checkboxes.push(moduloActivo.modulo_id);
               data.active = true;
             }
           });
