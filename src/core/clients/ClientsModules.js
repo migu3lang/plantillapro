@@ -44,6 +44,7 @@ export default function ClientsModules(props) {
       auxCheck = filter;
     }
     setCheckboxes(auxCheck);
+    // hola jurgen
     console.log(auxCheck);
   };
 
