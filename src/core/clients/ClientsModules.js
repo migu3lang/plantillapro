@@ -28,6 +28,7 @@ export default function ClientsModules(props) {
   const [modules, setModules] = useState([]);
 
   const [globalCheckboxes,setCheckboxes]=useState([]);
+  const [errorAxios,setErroraxios]=useState(null);
 
   function Comparador(elemento, comparar) {
     return elemento != comparar;
@@ -45,7 +46,7 @@ export default function ClientsModules(props) {
     }
     setCheckboxes(auxCheck);
     // hola jurgen
-    console.log(auxCheck);
+    
   };
 
   useEffect(() => {
@@ -95,7 +96,22 @@ export default function ClientsModules(props) {
       console.log(response.data);
     }).catch((error)=>{
       console.log(error.data);
+
+      if(error.response.status === 412)
+      {
+        console.log(error.response.data);
+        setErroraxios(error.response.data);
+
+
+      }
+
     })
+  }
+
+  const redirect = ()=>{
+
+    alert("sin cambios");
+    props.history.push("/admin/clients");
   }
 
   const elementos = (() => {
@@ -124,7 +140,10 @@ export default function ClientsModules(props) {
   const classes = useStyles();
 
   return (
+  
     <form>
+      
+      {errorAxios != null ? redirect() : null }
     <div className={classes.root}>
       <FormControl component="fieldset" className={classes.formControl}>
         <FormLabel component="legend">Assign responsibility</FormLabel>
